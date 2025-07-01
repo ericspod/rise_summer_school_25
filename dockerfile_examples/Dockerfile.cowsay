@@ -1,0 +1,20 @@
+
+# Alpine is a super-tiny base image which comes with very little. It uses something called BusyBox instead of glibc and
+# GNU tools so it's compatible with CUDA, but it can be used for doing simple tasks and CPU inference. 
+FROM alpine:3.22.0
+
+# Alpine has apk as its package manager, rather than apt. Even Python isn't install by default so we need to add this.
+RUN apk add git python3
+
+# This clones the Cowsay repository into /cowsay-python, we'll use this directly rather than installing.
+RUN git clone https://github.com/VaasuDevanS/cowsay-python.git
+
+# Set this environment variable to make Python look there for modules, this avoids having to install anything.
+ENV PYTHONPATH=/cowsay-python
+
+# Using ENTRYPOINT forces this to be the starting command for the container no matter what, so no way to start a shell
+# just from the "docker run" command. The consequence of this is that any arguments in the "docker run" command after
+# the image name are added to those given here, so you can add "-t MSG" to set the message yourself. Note this command
+# relies on the PYTHONPATH being set to be able to find the cowsay module.
+ENTRYPOINT ["python3","-m", "cowsay"]
+
