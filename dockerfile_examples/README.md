@@ -21,6 +21,31 @@ optionally change the character, eg.:
 
 The usage can be printed with `docker run --rm cowsaypy --help`.
 
+## Simple Input/Output
+
+This is also built off Alpine but installs the tree program. It will examine the contents of an input directory and
+put the tree output into a text file in the output directory. Building:
+
+`docker build . -t in_out -f Dockerfile.in_out`
+
+The idea is to mount a directory in the host system and get the tree output of its contents. One quirk of Docker is that
+it runs as root internally, and so output files are owned by root which is problematic at times. One solution is to run
+as the current user/group with the `-u` flag:
+
+```sh
+mkdir out
+docker run --rm -u $(id -u):$(id -g) -v $(pwd):/input -v $(pwd)/out:/output in_out
+```
+
+This will write to `./out/tree.txt` which is owned by the current user (as given by the user ID `id -u`). 
+
+The input/output paths are defined by environment variables which can be modified on the command line. Instead of 
+mounting `/input`, the variable for it can be changed with `-e` to point somewhere in the running container, eg. `/etc`:
+
+`docker run --rm -u $(id -u):$(id -g) -e INPUT_DIR=/etc -v $(pwd)/out:/output in_out`
+
+The `./out/tree.txt` file will now contain a tree listing of `/etc`.
+
 ## Minimum PyTorch
 
 This builds on the slim Python 3.12 image by installing PyTorch through pip. All the libraries needed for this are 

@@ -1,0 +1,12 @@
+# This simple program will run "tree" on the mounted input directory and store its result to a text file in the output.
+FROM alpine:3.22.0
+
+# environment variables are used to specify where these paths are, so these can be mount points or paths in the image.
+ENV INPUT_DIR=/input
+ENV OUTPUT_DIR=/output
+
+# Busybox comes with a version of tree which doesn't do what we want so need to install a different one.
+RUN apk add tree
+
+# Run using sh so that the environment variables get interpreted properly rather than passed as-is to tree.
+CMD ["/bin/sh", "-c", "tree -h --du -o ${OUTPUT_DIR}/tree.txt ${INPUT_DIR}"]
