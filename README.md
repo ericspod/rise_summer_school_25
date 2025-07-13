@@ -1,5 +1,4 @@
-# rise_summer_school_25
-RISE Summer School 2025 Git and Docker
+# RISE Summer School 2025 Git and Docker Lecture
 
 ## Git Installation
 
