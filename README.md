@@ -9,7 +9,7 @@ A useful tool to have along side the command line interface is a GUI application
 
 ## Docker Installation
 
-Docker sometimes requires some specific steps to get installed. Docker can be [installed for Windows or macOS](https://www.docker.com/get-started/) but this will use a virtual machine to run containers. Installation instructions for Linux can be [found here](https://docs.docker.com/engine/install], and those for the Nvidia Container Toolkit can be [found here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html). The toolkit is needed for accessing CUDA in a container.
+Docker sometimes requires some specific steps to get installed. Docker can be [installed for Windows or macOS](https://www.docker.com/get-started/) but this will use a virtual machine to run containers. Installation instructions for Linux can be [found here](https://docs.docker.com/engine/install), and those for the Nvidia Container Toolkit can be [found here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html). The toolkit is needed for accessing CUDA in a container.
 
 The following is for installing in Ubuntu and is known to work for both Docker itself and the toolkit, but you should read the above documentation in case those are better instructions for your setup:
 
@@ -62,7 +62,7 @@ sudo apt-get install -y nvidia-container-toolkit
 
 6. May need to restart docker daemon with `sudo systemctl restart docker`. Test with `sudo docker run --rm --gpus all ubuntu nvidia-smi`.
 
-7. You can enable running docker as a non-root user by add that user to the `docker` group, then logging back in.
+7. You can enable running docker as a non-root user by add that user to the `docker` group (eg. `sudo usermod USER -G docker`), logging that user out, then logging back in.
 
 ## Jupyter Installation
 
@@ -93,10 +93,12 @@ chromium --headless --print-to-pdf=git_docker_slides.pdf http://127.0.0.1:8000/g
 * https://about.gitlab.com/images/press/git-cheat-sheet.pdf
 * https://learngitbranching.js.org/ (very useful exercise)
 * https://git-scm.com/book/en/v2 (get the book)
+* https://github.com/git-guides
+* https://docs.github.com/en/get-started (getting started with Github)
 
 ## Useful Docker Resources
 
-* Main docs: https://docs.docker.com/
+* Main docs: https://docs.docker.com/ (start here: https://docs.docker.com/get-started)
 * Docker command line cheatsheet: https://docs.docker.com/get-started/docker_cheatsheet.pdf
 * Dockerfile reference: https://docs.docker.com/reference/dockerfile/
   

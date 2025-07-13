@@ -70,3 +70,8 @@ This example repository provides the training and inference scripts for a MONAI 
 The Dockerfile in this repo demonstrates installing requirements with pip in an efficient way and how to run inference
 with a mounted directory of inputs. It also uses the slim Python base image but installs PyTorch as a dependency of 
 MONAI, so the version it gets will be different from what's in the previous example image.
+
+One thing to note is that it copies the contents of the repo into the image with `COPY . /app`. Instead, one can clone 
+the repo into the `/app`  directory with `git clone https://github.com/ericspod/MONAI_101 /app` and then the following 
+commands can run as normal. This allows a Dockerfile to be defined without local data, however it does man that `git`
+needs to be installed in the image and the .git directory will be present if not deleted explicitly. 
